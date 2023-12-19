@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class Player : MonoBehaviour
                 PickupCoin();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            DropItem();
+        }
     }
 
     public void MakeItemAvailable(Transform coinToPickup)
@@ -35,7 +41,7 @@ public class Player : MonoBehaviour
         Debug.Log("Available for pickup!");
     }
 
-    public void MakeItemUnavailable(Transform coinToPickup)
+    public void MakeItemUnavailable()
     {
         currentPickupAvailable = null;
         availablePickup = false;
@@ -48,6 +54,15 @@ public class Player : MonoBehaviour
         currentPickupAvailable.SetParent(pickupTransform);
         hasCoin = true;
         Debug.Log("Item has been picked up!");
+    }
+
+    private void DropItem()
+    {
+        if(currentPickupAvailable != null)
+        {
+            currentPickupAvailable.SetParent(null);
+            hasCoin = false;
+        }
     }
 
     public bool HasCoin()
