@@ -19,8 +19,16 @@ public class TriggerInteraction : MonoBehaviour
             {
                 return;
             }
+        }
 
-            player.PickupCoin(other.transform);
+        player.MakeItemAvailable(other.transform);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Pickup"))
+        {
+            player.MakeItemUnavailable();
         }
     }
 }
