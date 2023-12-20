@@ -8,6 +8,8 @@ TagManager:
   - Deposit
   - Ground
   - Obstacle
+  - Door
+  - PlayerTrigger
   layers:
   - Default
   - TransparentFX
