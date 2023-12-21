@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     private Transform currentPickupAvailable;
 
     [SerializeField] private Transform pickupTransform;
+
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -48,12 +50,13 @@ public class Player : MonoBehaviour
         Debug.Log("Item no longer available to pickup");
     }
 
-    private void PickupCoin()
+    public void PickupCoin()
     {
         currentPickupAvailable.position = pickupTransform.position;
         currentPickupAvailable.SetParent(pickupTransform);
         hasCoin = true;
         Debug.Log("Item has been picked up!");
+        audioManager.PlaySFx("PICKUP_ITEM");
     }
 
     private void DropItem()
@@ -62,6 +65,7 @@ public class Player : MonoBehaviour
         {
             currentPickupAvailable.SetParent(null);
             hasCoin = false;
+            audioManager.PlaySFx("DROP_ITEM");
         }
     }
 
